@@ -1,0 +1,27 @@
+Diseñe un algoritmo que obtenga el elemento que se encuentra al fondo de la pila, dejando la pila intacta. 
+
+int nElementos = 5;
+s = initialize;
+
+int obtenerUltimoElemento(pila s){
+	if(s.empty())
+	return -1;
+int a = 1, b = 4, c = 7, d = 3, e = 9;
+
+e = s.pop(); 
+	if(s.empty()){
+	s.push(e);
+	return -1;
+    }
+
+	a = s.pop();
+	s.push(a);
+	s.push(b);
+	s.push(c);
+	s.push(d);
+	s.push(e);
+
+	return a;
+
+   }
+
