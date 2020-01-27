@@ -1,59 +1,82 @@
-#include <iostream>
-#include <string>
+#include<iostream>
 using namespace std;
 
 struct pais{
-string nombre;
-string capital;
-int habitantes;
+	string nombre, capital;
+	int habitantes;
 };
-struct pais continente[5];
-int suma = 0;
+typedef struct pais paises;
 
-//Prototipo ingresoDatos
-void ingresoDatos();
-//Prototipo sumaPoblacion
-int sumaPoblacion(struct pais *punt, int suma);
-//Prototipo mayorPoblacion
-void mayorPoblacion(struct pais *punt);
+struct continente{
+	string nombreContinente;
+	
+	int poblacion = 0;
+	
+	paises paisxCon[5];
+};
 
-//Inicio
-int main (){
-ingresoDatos();    
 
-    
+typedef struct continente continentes;
 
-    return 0;
-    
+int main(){
+	string mayorCapital;
+	string nombreContinentePoblacion;
+	bool encontreContinente = false;
+	continentes continente[5];
+	
+	cout << "Ingrese los datos: " << endl << endl;
+	
+	for(int i = 0; i < 4; i++){
+		cout << "Ingrese el nombre del continente " << i + 1 << ": " << endl;
+		cin >> continente[i].nombreContinente;
+		cout << endl;
+		
+		cout << "Introduzca la informacion de los paises para este continente: " << endl;
+		
+		for(int j = 0; j <= 4; j++){
+			cout << "Nombre del pais " << j +1 << ": " << endl;
+			cin >> continente[i].paisxCon[j].nombre;
+			cout << "Nombre de la Capital: " << endl;
+			cin >> continente[i].paisxCon[j].capital;
+			cout << "Cantidad de habitantes: " << endl;
+			cin >> continente[i].paisxCon[j].habitantes;
+			continente[i].poblacion = continente[i].poblacion + continente[i].paisxCon[j].habitantes;
+		}
+	}
+	
+	cout << "Los datos ingresados son: "<< endl << endl;
+	
+	for(int i = 0; i <= 4; i++){
+		int numMayor = 0;
+		cout << "Continente " << i + 1 << ": " << continente[i].nombreContinente << endl;
+		
+		for(int j = 0; j <= 4; j++){
+			cout << "Pais: " << j + 1<< ": " << continente[i].paisxCon[j].nombre << endl;
+			cout << "Capital: " << continente[i].paisxCon[j].capital << endl;
+			cout << "Habitantes: " << continente[i].paisxCon[j].habitantes << endl;
+			if(continente[i].paisxCon[j].habitantes > numMayor){
+				numMayor = continente[i].paisxCon[j].habitantes;
+				mayorCapital = continente[i].paisxCon[j].capital;
+			}
+		}
+		cout << "La capital con mayor poblacion es: " << mayorCapital << endl;	
+	}
+		cout << endl << endl << endl;
+	
+	
+	cout << "Ingrese el nombre del contiente del que desea saber su poblacion total: ";
+	cin >> nombreContinentePoblacion;
+	
+	for(int i = 0; i <=4; i++){
+		if(continente[i].nombreContinente == nombreContinentePoblacion){
+			cout << "La poblacion total de este continente es: " << continente[i].poblacion;
+			encontreContinente = true;
+		}
+	}
+	
+	if(encontreContinente == false){
+		cout << "El continente ingresado no existe";
+	}
+	
+return 0;
 }
-
-//Definicion ingresoDatos
-void ingresoDatos(){
-    for(int i = 0; i < 5; i++){
-        cout<<"Ingrese el nombre de un pais: ";
-    getline (cin, continente[i].nombre);
-
-    cout<<"Ingrese el nombre de la capital: ";
-    getline (cin, continente[i].capital);
-
-    cout<<"Ingrese el numero de habitantes: ";
-    cin>>continente[i].habitantes;
-    cin.ignore();
-    }
-
-
-//Definicion sumaPoblacion
-int sumaPoblacion(struct pais *punt, int suma){
-    for(int i = 0; i < 5; i++){
-        suma += continente[i].habitantes;
-        cout << "La suma total de la poblacion es: " << suma << endl;
-    }
-}
-
-//Definicion mayorPoblacion
-void mayorPoblacion(struct pais *punt){
-    for(int i = 0; i < 5; i++){
-        if(continente[i].habitantes > )
-    }
-}
-
