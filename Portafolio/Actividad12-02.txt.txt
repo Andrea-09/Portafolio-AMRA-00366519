@@ -1,11 +1,10 @@
-Se inicializa un nodo "result" puntero con valor NULL, para luego inicializar otro puntero con el
-valor de la lista y un nodo puntero sin valor especifico. Mientras el nodo con la lista no llegue
-al final de su recorrido, el nodo vacio "next" gana el valor del siguiente nodo en "current".
-Seguidamente, el nodo siguiente en current es reemplazado por el nodo result. result seguidamente
-guarda el valor ahora dentro de la variable current, y se reintroduce el valor de next dentro de 
-current. Esto significa que la primer iteracion nullifica la secuencia del primer elemento de la
-lista, guardando el resto de la lista en next. Ahora, el puntero nulo toma el valor del primer
-elemento de la lista, y se reintroducen loos valores siguientes a la variable current.
-En ciclos siguientes, se remueve el primer valor de la lista original, se le cambia el puntero
-siguiente para que apunte al ultimo nodo removido, y se guarda la nueva lista hasta que current 
-se muestre nulo.
+
+Se inicializa el puntero, llamado result, de tipo nodo con valor NULL ya que no apunta a nada, para después inicializar
+otro puntero, "current", con el valor de la lista completa y un nodo puntero, llamado next, sin valor específico que se 
+utilizará luego. Mientras el nodo que contiene la lista no complete recorrido el nodo next almacena el valor del nodo
+siguiente en current. Luego, el nodo siguiente de current es remplazado por el nodo result, quien guarda el valor que se
+encuentra en current y reintroduce el valor de next en current. Es decir, que la primera iteración cancela el recorrido
+del primer elemento de la lista, guardando el resto en el nodo next. De esta forma, el puntero result toma el valor del 
+primer elemento de la lista e ingresa los valores siguientes a él en current. Al momento de realizar los ciclos, se traslada
+el primer valor de la lista original, cambiando el puntero siguiente de tal manera que apunte al último nodo alterado, y
+guardando la nueva lista modificada hasta que el nodo currente apunte a NULL. 

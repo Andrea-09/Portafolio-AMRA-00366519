@@ -93,4 +93,4 @@ void borrarTodas(){
     }
   }
 
-//sNada mas arreglar la funcion de borrar todas y checkear la de mostrar todas
+//Nada mas arreglar la funcion de borrar todas y checkear la de mostrar todas

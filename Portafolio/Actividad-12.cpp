@@ -2,47 +2,47 @@
 #include <string>
 using namespace std;
 
-enum genre{scifi, adventure, police, romance, mistery};
+enum genero{scifi, aventura, policiaco, romance, misterio};
 
-struct book{
+struct libros{
     int ISBN;
-    string title;
-    string author;
-    genre bookGenre;
-    bool spanish;
+    string titulo;
+    string autor;
+    genero generoLibro;
+    bool espanol;
 };
 
-struct node{
-    book nodeBook;
-    node* nextNode;
+struct nodo{
+    libros nodoLibro;
+    nodo* siguiente;
 };
-node* list;
+nodo* lista;
 
-book provideData();
-void showData(book currentBook);
-bool compareBook(book bookA, book bookB);
-int countData();
-void insertBegin(book addedBook);
-void insertEnd(book addedBook);
-void insertAfter(book addedBook);
-void insertBefore(book addedBook);
-void add();
-void showAll();
-void deleteBook();
-void search();
-void invertList(node **startingNode);
-void emptyList(node** startingNode);
-int countInstances();
-book access();
+libros ingresar();
+void mostrarDatos(libros Libro);
+bool comparar(libros Libro1, libros Libro2);
+int contador();
+void insertaInicio(libros nuevoLibro);
+void insertarFinal(libros nuevoLibro);
+void insertaDespues(libros nuevoLibro);
+void insertarAntes(libros nuevoLibro);
+void agregar();
+void mostrarTodos();
+void eliminar();
+void buscar();
+void invertir(nodo** pInicio);
+void vaciar(nodo** pInicio);
+int contarCoincidencias();
+libros accesar();
 
-string printGenre[] = {"Ciencia Ficcion", "Aventura", "Policia", "Romance", "Misterio"};
-const book invalidBook = {0, "", "", scifi, false};
+string MostrarGenero[] = {"Ciencia Ficcion", "Aventura", "Policia", "romance", "Misterio"};
+
 
 int main(){
-    list = NULL;
+    lista = NULL;
     bool cont = true;
     do{
-        int option = 0;
+        int opcion = 0;
         cout << "Menu:\n";
         cout << "\t1. Agregar\n";
         cout << "\t2. Mostrar todos\n";
@@ -58,42 +58,42 @@ int main(){
         cout << "\t12. Remover todos los libros de ciencia ficcion\n";
         cout << "\t0. Salir\n";
         cout << "Su opcion: ";
-        cin >> option;
+        cin >> opcion;
         cin.ignore();
 
-        switch(option){
+        switch(opcion){
             case 1:
-                add();
+                agregar();
                 break;
             case 2:
-                showAll();
+                mostrarTodos();
                 break;
             case 3:
-                deleteBook();
+                eliminar();
                 break;
             case 4:
-                search();
+                buscar();
                 break;
             case 5:
-                invertList(&list);
+                invertir(&lista);
                 break;
             case 6:
-                emptyList(&list);
+                vaciar(&lista);
                 break;
             case 7:
-                cout << "Hay " << countData() << " datos.\n";
+                cout << "Datos: " << contador() << endl;
                 break;
             case 8:
-                cout << "Esta " << countInstances() << " veces.\n";
+                cout << "Exite " << contarCoincidencias() << " veces.\n";
                 break;
             case 9:
-                access();
+                accesar();
                 break;
             case 10:
-                showSpanish();
+                showespanol();
                 break;
             case 11:
-                showMistery();
+                showmisterio();
                 break;
             case 12:
                 deleteSciFi();
@@ -110,51 +110,51 @@ int main(){
     return 0;
 }
 
-book provideData(){
-    book currentBook;
+libros ingresar(){
+    libros Libro;
 
     cout << "Ingrese el ISBN.\n";
-    cin >> currentBook.ISBN;
+    cin >> Libro.ISBN;
     cin.ignore();
     cout << "Ingrese el titulo del libro.\n";
-    getline(cin, currentBook.title);
+    getline(cin, Libro.titulo);
     cout << "Ingrese el autor del libro.\n";
-    getline(cin, currentBook.author);
+    getline(cin, Libro.autor);
 
     bool cont = true;
     do{
-        char option = '0';
-        cout << "Ingrese el genero:\n \tA- Ciencia Ficcion\n \tB- Aventura\n \tC- Policial\n \tD- Romance\n \tE- Misterio\n";
-        cin >> option;
-        cin.ignore();switch (option)
+        char opcion = '0';
+        cout << "Ingrese el genero: (A- Ciencia Ficcion, B- Aventura, C- Policial, D- romance, E- Misterio)\t";
+        cin >> opcion;
+        cin.ignore();switch (opcion)
         {
         case 'a':
         case 'A':
-            currentBook.bookGenre = scifi;
+            Libro.generoLibro = scifi;
             cont = false;
             break;
         case 'b':
         case 'B':
-            currentBook.bookGenre = adventure;
+            Libro.generoLibro = aventura;
             cont = false;
             break;
         case 'c':
         case 'C':
-            currentBook.bookGenre = police;
+            Libro.generoLibro = policiaco;
             cont = false;
             break;
         case 'd':
         case 'D':
-            currentBook.bookGenre = romance;
+            Libro.generoLibro = romance;
             cont = false;
             break;
         case 'e':
         case 'E':
-            currentBook.bookGenre = mistery;
+            Libro.generoLibro = misterio;
             cont = false;
             break;
         default:
-        cout << "Opcion no soportada.\n";
+        cout << "Opcion invalida.\n";
             break;
         }
 
@@ -162,329 +162,328 @@ book provideData(){
     }while(cont);
     cont = true;
     do{
-        char option = '0';
+        char opcion = '0';
         cout << "Esta el libro en espanol? S/N\n";
-        cin >> option;
+        cin >> opcion;
         cin.ignore();
-        switch(option){
+        switch(opcion){
             case 's':
             case 'S':
-                currentBook.spanish = true;
+                Libro.espanol = true;
                 break;
             case 'n':
             case 'N':
-                currentBook.spanish = false;
+                Libro.espanol = false;
                 break;
             default:
-                cout << "Opcion no valida.\n";
+                cout << "Opcion invalida.\n";
                 break;
         }
     }while(cont);
 
-    return currentBook;
+    return Libro;
 }
 
-void showData(book currentBook){
-    cout << "ISBN: " << currentBook.ISBN << endl;
-    cout << "Titulo: " << currentBook.title << endl;
-    cout << "Autor: " << currentBook.author << endl;
-    cout << "Genero: " << printGenre[currentBook.bookGenre] << endl;
+void mostrarDatos(libros Libro){
+    cout << "ISBN: " << Libro.ISBN << endl;
+    cout << "Titulo: " << Libro.titulo << endl;
+    cout << "Autor: " << Libro.autor << endl;
+    cout << "Genero: " << MostrarGenero[Libro.generoLibro] << endl;
     cout << "Idioma: ";
-    (currentBook.spanish) ? cout << "Espanol\n" : cout << "Otro\n";
+    (Libro.espanol) ? cout << "Espanol\n" : cout << "Otro\n";
 }
 
-bool compareBook(book bookA, book bookB){
-    return (bookA.ISBN == bookB.ISBN) && (bookA.author == bookB.author) && (bookA.bookGenre == bookB.bookGenre) && (bookA.title == bookB.title) && (bookA.spanish == bookB.spanish);
+bool comparar(libros Libro1, libros Libro2){
+    return (Libro1.ISBN == Libro2.ISBN) && (Libro1.autor == Libro2.autor) && (Libro1.generoLibro == Libro2.generoLibro) && (Libro1.titulo == Libro2.titulo) && (Libro1.espanol == Libro2.espanol);
 }
 
-int countData(){
-    node* temp;
+int contador(){
+    nodo* aux;
 
-    int counter = 0;
+    int Contador = 0;
 
-    while(temp != NULL){
-        temp = temp->nextNode;
-        counter++;
+    while(aux != NULL){
+        aux = aux->siguiente;
+        Contador++;
     }
 
-    return counter;
+    return Contador;
 }
 
-void insertBegin(book addedBook){
-    node *newNode = new node;
-    newNode->nodeBook = addedBook;
-    newNode->nextNode = list;
+void insertaInicio(libros nuevoLibro){
+    nodo *newnodo = new nodo;
+    newnodo->nodoLibro = nuevoLibro;
+    newnodo->siguiente = lista;
 
-    list = newNode;
+    lista = newnodo;
 }
 
-void insertEnd(book addedBook){
-    node *newNode;
-    newNode->nodeBook = addedBook;
-    newNode->nextNode = NULL;
+void insertarFinal(libros nuevoLibro){
+    nodo *newnodo;
+    newnodo->nodoLibro = nuevoLibro;
+    newnodo->siguiente = NULL;
 
-    if(list == NULL){
-        list = newNode;
+    if(lista == NULL){
+        lista = newnodo;
     }
     else{
-        node *temp1 = list;
-        node *temp2 = NULL;
-        while(temp1 != NULL){
-            temp2 = temp1;
-            temp1 = temp1->nextNode;
+        nodo *aux1 = lista;
+        nodo *aux2 = NULL;
+        while(aux1 != NULL){
+            aux2 = aux1;
+            aux1 = aux1->siguiente;
         }
-        temp2->nextNode = newNode;
+        aux2->siguiente = newnodo;
     }
 }
 
-void insertAfter(book addedBook){
-    cout << "Libro a referenciar: ";
-    book reference = provideData();
+void insertaDespues(libros nuevoLibro){
+    cout << "Ingrese el libro que desea referenciar: ";
+    libros referencia = ingresar();
 
-    node *temp = list;
+    nodo *aux = lista;
 
-    while(temp != NULL && !compareBook(temp->nodeBook, reference)){
-        temp = temp->nextNode;
+    while(aux != NULL && !comparar(aux->nodoLibro, referencia)){
+        aux = aux->siguiente;
     }
-    if(temp == NULL){
-        cout << "El libro referenciado no existe.\n";
+    if(aux == NULL){
+        cout << "El libro no existe." << endl;
         return;
     }
     
-    node *newNode = new node;
-    newNode->nodeBook = addedBook;
-    newNode->nextNode = temp->nextNode;
+    nodo *newnodo = new nodo;
+    newnodo->nodoLibro = nuevoLibro;
+    newnodo->siguiente = aux->siguiente;
 
-    temp->nextNode = newNode;
+    aux->siguiente = newnodo;
 
     cout << "Libro insertado exitosamente.\n";
 }
 
-void insertBefore(book addedBook){
-    cout << "Libro a referenciar: ";
-    book reference = provideData();
+void insertarAntes(libros nuevoLibro){
+    cout << "Ingrese el nombre del libro: ";
+    libros referencia = ingresar();
 
-    node *temp = list;
-    node *temp2 = NULL;
+    nodo *aux = lista;
+    nodo *aux2 = NULL;
 
-    while(temp != NULL && !compareBook(temp->nodeBook, reference)){
-        temp2 = temp;
-        temp = temp->nextNode;
+    while(aux != NULL && !comparar(aux->nodoLibro, referencia)){
+        aux2 = aux;
+        aux = aux->siguiente;
     }
-    if(temp == NULL){
-        cout << "El libro referenciado no existe.\n";
+    if(aux == NULL){
+        cout << "El libro no existe.\n";
         return;
     }
     
-    node *newNode = new node;
-    newNode->nodeBook = addedBook;
-    newNode->nextNode = temp;
+    nodo *newnodo = new nodo;
+    newnodo->nodoLibro = nuevoLibro;
+    newnodo->siguiente = aux;
 
-    if(temp2 == NULL){
-        list = newNode;
+    if(aux2 == NULL){
+        lista = newnodo;
     }
     else{
-        temp->nextNode = newNode;
+        aux->siguiente = newnodo;
     }
 
     cout << "Libro insertado exitosamente.\n";
 }
 
-void add(){
-    book currentBook = provideData();
+void agregar(){
+    libros Libro = ingresar();
     bool cont = true;
     do{
-        int option = 0;
+        int opcion = 0;
         cout << "\t1) Al principio\n";
         cout << "\t2) Al final\n";
         cout << "\t3) Despues de\n";
         cout << "\t4) Antes de\n";
         cout << "\tOpcion elegida: ";
-        cin >> option;
-        switch(option){
+        cin >> opcion;
+        switch(opcion){
             case 1: 
-                insertBegin(currentBook); 
+                insertaInicio(Libro); 
                 cont = false; 
                 break;
             case 2: 
-                insertEnd(currentBook); 
+                insertarFinal(Libro); 
                 cont = false; 
                 break;
             case 3: 
-                insertAfter(currentBook); 
+                insertaDespues(Libro); 
                 cont = false; 
                 break;
             case 4: 
-                insertBefore(currentBook); 
+                insertarAntes(Libro); 
                 cont = false; 
                 break;
             default: 
-                cout << "Error" << endl; 
+                cout << "Adios" << endl; 
                 break;
         }
     }while(cont);
 }
 
-void showAll(){
-    node *temp = list;
+void mostrarTodos(){
+    nodo *aux = lista;
 
-    while(temp != NULL){
-        showData(temp->nodeBook);
-        temp = temp->nextNode;
+    while(aux != NULL){
+        mostrarDatos(aux->nodoLibro);
+        aux = aux->siguiente;
     }
 }
 
-void deleteBook(){
-    cout << "Book to be deleted: ";
-    book deletedBook = provideData();
+void eliminar(){
+    cout << "Ingrese el libro que desea borrar: ";
+    libros eliminados = ingresar();
 
-    node *temp = list;
-    node *temp2 = NULL;
+    nodo *aux = lista;
+    nodo *aux2 = NULL;
 
-    while(temp != NULL && !compareBook(temp->nodeBook, deletedBook)){
-        temp2 = temp;
-        temp = temp->nextNode;
+    while(aux != NULL && !comparar(aux->nodoLibro, eliminados)){
+        aux2 = aux;
+        aux = aux->siguiente;
     }
-    if(temp == NULL){
-        cout << "El libro a borrar no existe.\n";
+    if(aux == NULL){
+        cout << "El libro no existe.\n";
         return;
     }
-    if(temp2 == NULL){
-        list = temp->nextNode;
+    if(aux2 == NULL){
+        lista = aux->siguiente;
     }
     else{
-        temp2->nextNode = temp->nextNode;
+        aux2->siguiente = aux->siguiente;
     }
-    delete(temp);
+    delete(aux);
     cout << "Libro borrado exitosamente.\n";
 }
 
-void search(){
-    cout << "Book to search for: ";
-    book searchedBook = provideData();
+void buscar(){
+    cout << "Que libro desea buscar?: ";
+    libros buscaredlibros = ingresar();
 
-    node *temp = list;
+    nodo *aux = lista;
 
-    while(temp != NULL && !compareBook(temp->nodeBook, searchedBook)){
-        temp = temp->nextNode;
+    while(aux != NULL && !comparar(aux->nodoLibro, buscaredlibros)){
+        aux = aux->siguiente;
     }
 
-    if(temp != NULL){
-        cout << "El libro si existe.\n";
+    if(aux != NULL){
+        cout << "Libro encontrado." << endl;
     }
     else{
-        cout << "El libro no existe.\n";
+        cout << "No se encontro el libro" << endl;
     }
 }
 
-void invertList(node **startingNode){
-    node* result = NULL;
-    node* current = *startingNode;
-    node* next;
+void invertir(nodo **pInicio){
+    nodo* resultado = NULL;
+    nodo* actual = *pInicio;
+    nodo* sig;
 
-    while(current != NULL){
-        next = current->nextNode;
-        current->nextNode = result;
-        result = current;
+    while(actual != NULL){
+        sig = actual->siguiente;
+        actual->siguiente = resultado;
+        resultado = actual;
 
-        current = next;
+        actual = sig;
     }
-    *startingNode = result;
+    *pInicio = resultado;
 }
 
-void emptyList(node** startingNode){
-    node* current = *startingNode;
-    node* next;
+void vaciar(nodo** pInicio){
+    nodo* actual = *pInicio;
+    nodo* sig;
 
-    while(current != NULL){
-        next = current->nextNode;
-        delete(current);
-        current = next;
+    while(actual != NULL){
+        sig = actual->siguiente;
+        delete(actual);
+        actual = sig;
     }
-    *startingNode = NULL;
+    *pInicio = NULL;
 }
 
-int countInstances(){
-    cout << "Book to search for: ";
-    book searchedBook = provideData();
+int contarCoincidencias(){
+    cout << "Ocurrencias: ";
+    libros buscaredlibros = ingresar();
 
-    node* current = list;
-    int counter = 0;
+    nodo* actual = lista;
+    int Contador = 0;
 
-    while(current != NULL){
-        if(compareBook(current->nodeBook, searchedBook)){
-            counter++;
+    while(actual != NULL){
+        if(comparar(actual->nodoLibro, buscaredlibros)){
+            Contador++;
         }
-        current = current->nextNode;
+        actual = actual->siguiente;
     }
-    return counter;
+    return Contador;
 }
 
-book access(){
+libros accesar(){
     int index;
-    cout << "Index to access.\n";
+    cout << "Plantilla de acceso." << endl;
     cin >> index;
     cin.ignore();
 
-    if(index >=0 && index < countData()){
-        node *temp = list;
+    if(index >=0 && index < contador()){
+        nodo *aux = lista;
         for(int i = 0; i < index; i++){
-            temp = temp->nextNode;
+            aux = aux->siguiente;
         }
-        showData(temp->nodeBook);
-        return temp->nodeBook;
+        mostrarDatos(aux->nodoLibro);
+        return aux->nodoLibro;
     }
     else{
-        cout << "Error, invalid index.\n";
-        return invalidBook;
+        cout << "Error" << endl;
     }
 }
 
-void showSpanish(){
-    int counter = 0;
-    node* temp = list;
-    while(temp != NULL){
-        if((*temp).nodeBook.spanish){
-            showData((*temp).nodeBook);
-            counter++;
+void showespanol(){
+    int Contador = 0;
+    nodo* aux = lista;
+    while(aux != NULL){
+        if((*aux).nodoLibro.espanol){
+            mostrarDatos((*aux).nodoLibro);
+            Contador++;
         }
     }
-    if(counter == 0){
+    if(Contador == 0){
         cout << "No hay libros en espanol.\n";
     }
     cout << "Finalizado.\n";
 }
 
-void showMistery(){
-    int counter = 0;
-    node* temp = list;
-    while(temp != NULL){
-        if((*temp).nodeBook.bookGenre == mistery){
-            showData((*temp).nodeBook);
-            counter++;
+void showmisterio(){
+    int Contador = 0;
+    nodo* aux = lista;
+    while(aux != NULL){
+        if((*aux).nodoLibro.generoLibro == misterio){
+            mostrarDatos((*aux).nodoLibro);
+            Contador++;
         }
     }
-    if(counter == 0){
+    if(Contador == 0){
         cout << "No hay libros en espanol.\n";
     }
     cout << "Finalizado.\n";
 }
 
 void deleteSciFi(){
-    node* temp0 = NULL;
-    node* temp1 = list;
-    node* temp2;
-    while(temp1 != NULL){
-        if((*temp1).nodeBook.bookGenre == scifi){
-            temp2 = temp1->nextNode;
-            if(!(temp0))
-                temp0->nextNode = temp2;
+    nodo* aux0 = NULL;
+    nodo* aux1 = lista;
+    nodo* aux2;
+    while(aux1 != NULL){
+        if((*aux1).nodoLibro.generoLibro == scifi){
+            aux2 = aux1->siguiente;
+            if(!(aux0))
+                aux0->siguiente = aux2;
             else
-                temp0 = temp2;
-            delete(temp1);
-            temp1 = temp2;
+                aux0 = aux2;
+            delete(aux1);
+            aux1 = aux2;
         }
-        temp0 = temp1;
-        temp1 = temp1->nextNode;
+        aux0 = aux1;
+        aux1 = aux1->siguiente;
     }
 }
