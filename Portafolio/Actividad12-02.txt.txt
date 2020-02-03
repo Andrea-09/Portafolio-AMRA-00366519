@@ -1,0 +1,11 @@
+Se inicializa un nodo "result" puntero con valor NULL, para luego inicializar otro puntero con el
+valor de la lista y un nodo puntero sin valor especifico. Mientras el nodo con la lista no llegue
+al final de su recorrido, el nodo vacio "next" gana el valor del siguiente nodo en "current".
+Seguidamente, el nodo siguiente en current es reemplazado por el nodo result. result seguidamente
+guarda el valor ahora dentro de la variable current, y se reintroduce el valor de next dentro de 
+current. Esto significa que la primer iteracion nullifica la secuencia del primer elemento de la
+lista, guardando el resto de la lista en next. Ahora, el puntero nulo toma el valor del primer
+elemento de la lista, y se reintroducen loos valores siguientes a la variable current.
+En ciclos siguientes, se remueve el primer valor de la lista original, se le cambia el puntero
+siguiente para que apunte al ultimo nodo removido, y se guarda la nueva lista hasta que current 
+se muestre nulo.
