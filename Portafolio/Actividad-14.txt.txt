@@ -1,0 +1,45 @@
+1. Árbol #1
+ °Nodo raíz: A
+ °Nodo ramas: B, C, D, E, F
+ °Nodos hojas: G, H, I
+
+ °Nodo A - nivel 0
+ °Nodo B y C - nivel 1
+ °Nodo D, E y F - nivel 2
+ °Nodo G, H e I - nivel 3
+
+ °Profundida: 3
+ °Peso: 9 
+ °Orden: 2
+
+ °No es estricto (lleno)
+ °No es perfecto (completo)
+
+ °Recorrido in orden: D, G, B, A, H, E, I, C, F
+ °Recorrido pre orden: A, B, D, G, C, E, H, I, F
+ °Recorrido post orden: G, D, B, H, I, E, F, C, A
+
+
+2. Árbol #2
+ °Nodo raíz: A
+ °Nodo ramas: B, C, D, E, F, H
+ °Nodos hojas: I, J, G, K, L
+
+ °Nodo A - nivel 0
+ °Nodo B y C - nivel 1
+ °Nodo C y D - nivel 2
+ °Nodo E, F, G, H - nivel 3
+ °Nodo I, J, K, L - nivel 4
+
+ °Profundida: 4
+ °Peso: 12 
+ °Orden: 2
+
+ °No es estricto (lleno)
+ °No es perfecto (completo)
+
+ °Recorrido in orden: E, I, C, F, J, B, G, D, K, H, L, A
+ °Recorrido pre orden: A, B, C, E, I, F, J, D, G, H, K, L
+ °Recorrido post orden: I, E, J, F, C, G, K, L, H, D, B, A
+
+

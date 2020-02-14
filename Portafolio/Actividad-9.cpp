@@ -1,96 +1,136 @@
 #include <iostream>
-#include <string>
 #include <queue>
+#include <string> 
+
 using namespace std;
 
-struct insertarActividad{
-  string Titulo;
-  string Hora;
-  int Duracion;
-  string Descripcion;
-  string Tipo;
+struct actividad{
+    string nombre;
+    string tiempo;
+    int duracion;
+    string descripcion;
+    char tipo;
 };
-typedef struct insertarActividad Actividad;
+typedef struct actividad Act;
 
 struct agenda{
-    queue <Actividad> colaToDo;
+    queue <actividad> toDoList;
 };
+typedef struct agenda Agenda;
 
-agenda agendaPersonal;
+Agenda personalAgenda;
 
-void Insertar();
-void VerActividades();
-void borrarUna();
+void agregar();
+void borrar();
 void borrarTodas();
+void mostrarTodas();
 
 
 int main(){
-    bool continuar = true;
+    bool cont = true;
     do{
-        int opcion = 0;
-        cout << "\n1) Agregar una actividad\n";
-        cout << "2) Ver las actividades\n";
-        cout << "3) Borrar una actividad\n";
-        cout << "4) Borrar todas las actividades\n";
-        cout << "5) Salir\n";
-        cout << "Opcion elegida: ";
-        cin >> opcion; cin.ignore();
-       
-        switch(opcion){
-            case 1: Insertar(); break;
-            case 2: VerActividades(); break;
-            case 3: borrarUna(); break;
-            case 4: borrarTodas(); break;
-            case 5: continuar = false; break;
-            default: cout << "Opcion invalida!\n"; break;
+        int option = 0;
+        cout << "\t1. Insertar una actividad.\n";
+        cout << "\t2. Borrar una actividad.\n";
+        cout << "\t3. Borrar todas las actividades.\n";
+        cout << "\t4. Ver todas las actividades.\n";
+        cout << "\t5. Salir.\n";
+        cin >> option;
+        cin.ignore();
+
+        switch(option){
+        case 1:
+            agregar();
+            break;
+        case 2:
+            borrar();
+            break;
+        case 3:
+            borrarTodas();
+            break;
+        case 4:
+            mostrarTodas();
+            break;
+        case 5:
+            cont = false;
+            break;
+        default:
+            break;
         }
-    }while(continuar);
+    }while(cont == true);
+
+
+    return 0;
 }
 
-
-
-void Insertar(){
-    Actividad unaActividad;
-    cout << "Ingrese su actividad del dia: ";
-    getline(cin, unaActividad.Titulo);
-    cout << "Ingrese la hora de su actividad: ";
-    getline(cin, unaActividad.Hora);
-    cout << "Cuanto dura su actividad?";
-    cin >> unaActividad.Duracion;
+void agregar(){
+    Act nuevaActividad;
+    cout << "Digite el nombre de la actividad.\n";
+    getline(cin, nuevaActividad.nombre);
+    cout << "Digite la hora de la actividad.\n";
+    getline(cin, nuevaActividad.tiempo);
+    cout << "Ingrese la duracion de la actividad.\n";
+    cin >> nuevaActividad.duracion;
     cin.ignore();
-    cout << "Ingrese una descripcion de su actividad: ";
-    getline(cin, unaActividad.Descripcion);
-    cout << "Su actividad es de tipo: ";
-    getline(cin, unaActividad.Tipo);
-   
-    //Agregar a la cola
-    agendaPersonal.colaToDo.push(unaActividad);
+    cout << "Ingrese una descripcion de la actividad.\n";
+    getline(cin, nuevaActividad.descripcion);
+    cout << "Ingrese el tipo de la actividad.\n \tE - Educacion\t R - Recreacion\n";
+    cin >> nuevaActividad.tipo;
+
+    personalAgenda.toDoList.push(nuevaActividad);
 }
 
-void VerActividades(){
-    cout << "Actividades del dia: " << agendaPersonal.colaToDo.size() <<endl;
-   
-}
-
-void borrarUna(){
-    int op;
-    cout << "Desea borrar una actividad? Digite 1 para hacerlo o digite 2 para cancelar." << endl;
-    cin >> op;
-    if(op == 1){
-        agendaPersonal.colaToDo.pop();
-        cout << "Se ha borado la actividad" << endl;
-      }
+void borrar(){
+    if(!personalAgenda.toDoList.empty()){
+        Act current = personalAgenda.toDoList.front();
+        cout << "La actividad a borrar es: \n";
+        cout << "Nombre: " << current.nombre << endl;
+        cout << "Hora: " << current.tiempo << endl;
+        cout << "Duracion: " << current.duracion << endl;
+        cout << "Descripcion: " << current.descripcion << endl;
+        cout << "Tipo: " << current.tipo << endl;
+        personalAgenda.toDoList.pop();
     }
-
+    else{
+        cout << "ESTA VACIO" << endl;
+    }
+}
 
 void borrarTodas(){
-    int op;
-    cin >> op;
-    cout << "Desea borrar todas las actividades? Digite 1 para hacerlo o digite 2 para cancelar." <<endl;
-    if(op == 1){
-        agendaPersonal.colaToDo.pop();
-        cout << "Se han borrado todas las actividades" << endl;
+    if(personalAgenda.toDoList.empty()){
+        cout << "ESTA VACIO" << endl;
     }
-  }
+    while(!personalAgenda.toDoList.empty()){
+        Act current = personalAgenda.toDoList.front();
+        cout << "La actividad a borrar es: \n";
+        cout << "Nombre: " << current.nombre << endl;
+        cout << "Hora: " << current.tiempo << endl;
+        cout << "Duracion: " << current.duracion << endl;
+        cout << "Descripcion: " << current.descripcion << endl;
+        cout << "Tipo: " << current.tipo << endl;
+        personalAgenda.toDoList.pop();
+    }
+}
 
-//Nada mas arreglar la funcion de borrar todas y checkear la de mostrar todas
+void mostrarTodas(){
+    Agenda T;
+    if(personalAgenda.toDoList.empty()){
+        cout << "ESTA VACIO" << endl;
+    }
+    while(!personalAgenda.toDoList.empty()){
+        Act current = personalAgenda.toDoList.front();
+        T.toDoList.push(current);
+        cout << "La actividad es: \n";
+        cout << "Nombre: " << current.nombre << endl;
+        cout << "Hora: " << current.tiempo << endl;
+        cout << "Duracion: " << current.duracion << endl;
+        cout << "Descripcion: " << current.descripcion << endl;
+        cout << "Tipo: " << current.tipo << endl;
+        personalAgenda.toDoList.pop();
+    }
+    while(!T.toDoList.empty()){
+        Act current = T.toDoList.front();
+        personalAgenda.toDoList.push(current);
+        T.toDoList.pop();
+    }
+}

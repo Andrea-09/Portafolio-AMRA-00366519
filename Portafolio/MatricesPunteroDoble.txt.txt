@@ -1,0 +1,9 @@
+Arreglo[10][20]
+
+Direccion Arreglo[0][0] = 100
+Direccion Arreglo[2][1] = 141
+Direccion Arreglo[5][1] = 201
+Drieccion Arreglo[1][10] = 130
+Direccion Arreglo[2][10] = 150
+Direccion Arreglo[5][3] = 203
+Direccion Arreglo[9][19] = 299
