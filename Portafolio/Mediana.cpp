@@ -1,6 +1,17 @@
 #include<iostream>
 using namespace std;
 
+float mediana(int a[], int tamano);
+
+int main(){
+	
+	int a[6] = {2,3,6,8,10,14};
+	int tamano = 6;
+	int med = mediana(a, tamano);
+	cout << "La mediana es: " << med;
+	return 0;
+}
+
 float mediana(int a[], int tamano){
 	int mediana;
 	int b = 0;
@@ -12,11 +23,3 @@ float mediana(int a[], int tamano){
 	
 }
 
-int main(){
-	
-	int a[6] = {2,3,6,8,10,14};
-	int tamano = 6;
-	int med = mediana(a, tamano);
-	cout << "La mediana es: " << med;
-	return 0;
-}
